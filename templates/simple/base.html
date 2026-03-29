@@ -9,7 +9,7 @@
   <meta name="referrer" content="no-referrer">
   <meta name="robots" content="noarchive">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block title %}{% endblock %}{{ instance_name }}</title>
+  <title>{% block title %}{% endblock %}Sunny Search</title>
   <script type="module" src="{{ url_for('static', filename='sxng-core.min.js') }}" client_settings="{{ client_settings }}"></script>
   {% block meta %}{% endblock %}
   {% if rtl %}
@@ -17,6 +17,7 @@
   {% else %}
   <link rel="stylesheet" href="{{ url_for('static', filename='sxng-ltr.min.css') }}" type="text/css" media="screen">
   {% endif %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='themes/simple/custom-google.css') }}" type="text/css" media="screen">
   {% if get_setting('server.limiter') or get_setting('server.public_instance') %}
   <link rel="stylesheet" href="{{ url_for('client_token', token=link_token) }}" type="text/css">
   {% endif %}
@@ -58,6 +59,10 @@
           <a href="{{ url_for('preferences') }}" class="link_on_top_preferences">{{ icon_big('settings') }}<span>{{ _('Preferences') }}</span></a>
         {%- endif -%}
       {%- endblock -%}
+      <button id="theme_toggle" type="button" aria-label="{{ _('Toggle dark mode') }}" title="{{ _('Toggle dark mode') }}">
+        <span class="theme_toggle_icon" aria-hidden="true">◐</span>
+        <span class="theme_toggle_text">{{ _('Theme') }}</span>
+      </button>
     </nav>
     {% block header %}
     {% endblock %}
@@ -66,23 +71,34 @@
   </main>
   <footer>
     <p>
-    {{ _('Powered by') }} <a href="{{ url_for('info', pagename='about') }}">Sunny Search</a> - {{ searxng_version }} — {{ _('a privacy-respecting, open metasearch engine') }}<br>
-        <a href="{{ searxng_git_url }}">{{ _('Source code') }}</a>
-        | <a href="{{ get_setting('brand.issue_url') }}">{{ _('Issue tracker') }}</a>
-        {% if enable_metrics %}| <a href="{{ url_for('stats') }}">{{ _('Engine stats') }}</a>{% endif %}
-        {% if get_setting('brand.public_instances') %}
-        | <a href="{{ get_setting('brand.public_instances') }}">{{ _('Public instances') }}</a>
-        {% endif %}
-        {% if get_setting('general.privacypolicy_url') %}
-        | <a href="{{ get_setting('general.privacypolicy_url') }}">{{ _('Privacy policy') }}</a>
-        {% endif %}
-        {% if get_setting('general.contact_url') %}
-        | <a href="{{ get_setting('general.contact_url') }}">{{ _('Contact instance maintainer') }}</a>
-        {% endif %}
-        {% for title, link in get_setting('brand.custom.links').items() %}
-        | <a href="{{ link }}">{{ _(title) }}</a>
-        {% endfor %}
+    {{ _('Powered by') }} <a href="https://searxng.org/" rel="noreferrer noopener" target="_blank">SearXNG</a> · Designed by Sunny
+    {% if enable_metrics %} · <a href="{{ url_for('stats') }}">{{ _('Engine stats') }}</a>{% endif %}
     </p>
   </footer>
+  <script>
+    (() => {
+      const root = document.documentElement;
+      const btn = document.getElementById('theme_toggle');
+      if (!btn) return;
+      const getTheme = () => {
+        if (root.classList.contains('theme-dark') || root.classList.contains('theme-black')) return 'theme-dark';
+        if (root.classList.contains('theme-light')) return 'theme-light';
+        return 'theme-auto';
+      };
+      const applyTheme = (themeName) => {
+        root.classList.remove('theme-auto', 'theme-light', 'theme-dark', 'theme-black');
+        root.classList.add(themeName);
+        localStorage.setItem('sunny-theme', themeName);
+        document.querySelectorAll('input[name=\"theme\"]').forEach((input) => {
+          input.value = themeName.replace('theme-', '');
+        });
+      };
+      const saved = localStorage.getItem('sunny-theme');
+      if (saved && ['theme-light', 'theme-dark', 'theme-auto'].includes(saved)) applyTheme(saved);
+      btn.addEventListener('click', () => {
+        applyTheme(getTheme() === 'theme-dark' ? 'theme-light' : 'theme-dark');
+      });
+    })();
+  </script>
 </body>
 </html>

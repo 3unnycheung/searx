@@ -243,17 +243,22 @@ hr,
 }
 
 .index .title {
-  background: url(./img/logo.svg) center center / contain no-repeat !important;
+  background: url("./img/logo.svg") center center / contain no-repeat !important;
   width: min(820px, 88vw) !important;
   min-height: 142px !important;
   margin: 0 auto 22px !important;
 }
 
 .index h1 {
-  visibility: hidden !important;
-  font-size: 0 !important;
-  line-height: 0 !important;
-  margin: 0 !important;
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }
 
 .index .search_box,
@@ -265,10 +270,11 @@ hr,
 /* ---------- Top nav ---------- */
 #links_on_top {
   top: 14px !important;
-  right: 18px !important;
+  inset-inline-end: 18px !important;
   display: flex !important;
   align-items: center !important;
   gap: 8px !important;
+  z-index: 95 !important;
 }
 
 #links_on_top a {
@@ -323,14 +329,15 @@ body.results_endpoint #search_header {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  width: 38px !important;
-  height: 38px !important;
-  min-width: 38px !important;
-  min-height: 38px !important;
-  max-width: 38px !important;
-  max-height: 38px !important;
+  width: 46px !important;
+  height: 46px !important;
+  min-width: 46px !important;
+  min-height: 46px !important;
+  max-width: 46px !important;
+  max-height: 46px !important;
   padding: 0 !important;
-  margin: 6px 14px 0 10px !important;
+  margin-block-start: 2px !important;
+  margin-inline: 8px 14px !important;
   overflow: hidden !important;
   line-height: 0 !important;
   font-size: 0 !important;
@@ -339,12 +346,12 @@ body.results_endpoint #search_header {
 #search_logo img,
 #search_logo svg {
   display: block !important;
-  width: 38px !important;
-  height: 38px !important;
-  min-width: 38px !important;
-  min-height: 38px !important;
-  max-width: 38px !important;
-  max-height: 38px !important;
+  width: 46px !important;
+  height: 46px !important;
+  min-width: 46px !important;
+  min-height: 46px !important;
+  max-width: 46px !important;
+  max-height: 46px !important;
   object-fit: contain !important;
 }
 
@@ -414,15 +421,11 @@ body.results_endpoint #search_logo svg {
 }
 
 #q,
-#q::placeholder,
-#q::-webkit-input-placeholder,
-#q::-moz-placeholder {
+#q::placeholder {
   color: var(--text-1) !important;
 }
 
-#q::placeholder,
-#q::-webkit-input-placeholder,
-#q::-moz-placeholder {
+#q::placeholder {
   color: var(--text-4) !important;
 }
 
@@ -450,12 +453,12 @@ body.results_endpoint #search_logo svg {
 }
 
 #clear_search {
-  right: 48px !important;
+  inset-inline-end: 48px !important;
   color: var(--text-3) !important;
 }
 
 #send_search {
-  right: 10px !important;
+  inset-inline-end: 10px !important;
   color: var(--text-3) !important;
 }
 
@@ -495,6 +498,11 @@ body.results_endpoint #search_logo svg {
   line-height: 1 !important;
 }
 
+#clear_search .show_if_nojs,
+#send_search .show_if_nojs {
+  display: none !important;
+}
+
 /* ---------- Autocomplete ---------- */
 .autocomplete {
   width: min(760px, 100%) !important;
@@ -502,8 +510,11 @@ body.results_endpoint #search_logo svg {
   background: transparent !important;
   position: absolute !important;
   top: calc(100% + 10px) !important;
-  left: 0 !important;
+  inset-inline-start: 0 !important;
   z-index: 9999 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
 }
 
 .autocomplete,
@@ -539,6 +550,9 @@ body.results_endpoint #search_logo svg {
   border-radius: 24px !important;
   margin-top: 8px !important;
   overflow: hidden !important;
+  pointer-events: auto !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .autocomplete::before,
@@ -589,11 +603,11 @@ body.results_endpoint #search_logo svg {
 .search_filters {
   display: flex !important;
   flex-wrap: wrap !important;
-  justify-content: flex-end !important;
+  justify-content: flex-start !important;
   align-items: center !important;
   gap: 10px !important;
   margin: 8px 0 0 !important;
-  margin-left: 54px !important;
+  margin-inline-start: 0 !important;
   width: min(760px, 100%) !important;
 }
 
@@ -809,6 +823,14 @@ article[data-vim-selected]::after {
   color: var(--brand) !important;
   text-decoration: none !important;
   border-radius: 999px !important;
+  border: 1px solid color-mix(in srgb, var(--brand) 32%, var(--line-soft)) !important;
+  background: color-mix(in srgb, var(--brand) 10%, var(--bg-subtle)) !important;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04) !important;
+}
+
+a.cache_link,
+a.cache_link:visited {
+  color: var(--brand) !important;
 }
 
 .result a.thumbnail_link {
@@ -849,9 +871,10 @@ article[data-vim-selected]:focus,
 article[data-vim-selected="true"]:focus,
 #main_results article.result:focus,
 #main_results article.result:focus-within {
-  border: none !important;
-  outline: none !important;
-  box-shadow: none !important;
+  border: 1px solid color-mix(in srgb, var(--brand) 42%, transparent) !important;
+  outline: 2px solid color-mix(in srgb, var(--brand) 25%, transparent) !important;
+  outline-offset: 3px !important;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--brand) 18%, transparent) !important;
 }
 
 /* ---------- Sidebar / answers ---------- */
@@ -925,7 +948,7 @@ article[data-vim-selected="true"]:focus,
   color: var(--text-3) !important;
 }
 
-#main_preferences input:not([type=checkbox]):not([type=radio]),
+#main_preferences input:not([type="checkbox"], [type="radio"]),
 #main_preferences select,
 #main_preferences textarea,
 select {
@@ -953,8 +976,8 @@ select option {
   color: var(--text-1) !important;
 }
 
-#main_preferences input:not([type=checkbox]):not([type=radio]):hover,
-#main_preferences input:not([type=checkbox]):not([type=radio]):focus,
+#main_preferences input:not([type="checkbox"], [type="radio"]):hover,
+#main_preferences input:not([type="checkbox"], [type="radio"]):focus,
 #main_preferences select:hover,
 #main_preferences select:focus,
 #main_preferences textarea:hover,
@@ -1011,28 +1034,32 @@ select:focus {
   border-radius: 14px !important;
   background: var(--bg-elevated) !important;
   color: var(--text-1) !important;
-  min-height: 46px !important;
-  padding: 0 18px !important;
-  font-size: 21px !important;
+  min-height: 40px !important;
+  padding: 0 14px !important;
+  font-size: 16px !important;
   box-shadow: var(--shadow-sm) !important;
 }
 
 #pagination .numbered_pagination .page_number input,
 #pagination .numbered_pagination .page_number_current {
-  min-width: 52px !important;
-  min-height: 46px !important;
-  border-radius: 14px !important;
+  min-width: 40px !important;
+  min-height: 36px !important;
+  border-radius: 10px !important;
 }
 
 #backToTop {
-  right: 24px !important;
+  inset-inline-end: 24px !important;
   bottom: 28px !important;
+  width: auto !important;
+  height: auto !important;
+  position: fixed !important;
+  z-index: 40 !important;
 }
 
 #backToTop a {
-  width: 52px !important;
-  height: 52px !important;
-  border-radius: 16px !important;
+  width: 42px !important;
+  height: 42px !important;
+  border-radius: 12px !important;
   border: 1px solid var(--line) !important;
   background: linear-gradient(150deg, color-mix(in srgb, var(--brand) 18%, var(--bg-elevated)), var(--bg-elevated)) !important;
   color: var(--brand) !important;
@@ -1059,20 +1086,22 @@ select:focus {
 
 .result-images {
   overflow: hidden !important;
-  padding: 0 !important;
+  padding: 6px !important;
   border-radius: 20px !important;
+  background: var(--bg-elevated) !important;
 }
 
 .result-images a {
   display: block !important;
-  min-height: 260px !important;
+  min-height: 220px !important;
 }
 
 .result-images .image_thumbnail {
   width: 100% !important;
-  height: 260px !important;
-  object-fit: cover !important;
-  border-radius: 0 !important;
+  height: 240px !important;
+  object-fit: contain !important;
+  border-radius: 12px !important;
+  background: var(--bg-subtle) !important;
 }
 
 .result-images img,
@@ -1088,33 +1117,64 @@ select:focus {
 }
 
 .result-videos .result_author {
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 8px !important;
-  padding: 2px 10px !important;
-  border-radius: 999px !important;
-  background: var(--bg-subtle) !important;
+  display: none !important;
+}
+
+.result-videos .altlink {
+  margin: 8px 0 10px !important;
+}
+
+.result-videos .altlink .btn-collapse {
+  border-radius: 10px !important;
+  min-height: 38px !important;
+  padding: 0 14px !important;
+  font-size: 16px !important;
+}
+
+.result-news .result {
+  border: 1px solid var(--line-soft) !important;
+  border-radius: 16px !important;
+  padding: 14px !important;
+}
+
+.result-news .url_wrapper {
+  display: block !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  font-size: 12px !important;
+  color: var(--text-3) !important;
 }
 
 .sunny_pagination_word {
   width: 100% !important;
+  display: block !important;
   text-align: center !important;
-  font-size: 56px !important;
+  font-size: 34px !important;
   font-weight: 700 !important;
   letter-spacing: -0.04em !important;
-  color: #e8eaed !important;
-  margin: 8px 0 6px !important;
+  color: var(--text-1) !important;
+  margin: 4px 0 2px !important;
   line-height: 1 !important;
-}
-
-:root.theme-light .sunny_pagination_word,
-:root.theme-auto .sunny_pagination_word {
-  color: #202124 !important;
 }
 
 .sunny_pagination_word .sunny_g,
 .sunny_pagination_word span:nth-child(n+2) {
   color: var(--brand) !important;
+}
+
+.numbered_pagination {
+  justify-content: center !important;
+  align-items: center !important;
+  flex-wrap: nowrap !important;
+  gap: 6px !important;
+  overflow-x: auto !important;
+  padding-bottom: 6px !important;
+}
+
+.numbered_pagination .page_number,
+.numbered_pagination .page_number_current {
+  margin-top: 4px !important;
 }
 
 /* ---------- Footer ---------- */
@@ -1153,15 +1213,55 @@ footer p {
   color: var(--text-1) !important;
 }
 
-:root.theme-dark .result *,
-:root.theme-black .result *,
-:root.theme-dark #answers *,
-:root.theme-black #answers *,
-:root.theme-dark #sidebar .infobox *,
-:root.theme-black #sidebar .infobox *,
-:root.theme-dark .autocomplete *,
-:root.theme-black .autocomplete * {
-  color: inherit !important;
+:root.theme-dark .result .content,
+:root.theme-black .result .content,
+:root.theme-dark #answers p,
+:root.theme-black #answers p,
+:root.theme-dark #sidebar .infobox p,
+:root.theme-black #sidebar .infobox p,
+:root.theme-dark .autocomplete > ul > li,
+:root.theme-black .autocomplete > ul > li {
+  color: var(--text-2) !important;
+}
+
+:root.theme-dark .result h3 a,
+:root.theme-black .result h3 a {
+  color: var(--brand) !important;
+}
+
+:root.theme-dark .result h3 a:visited,
+:root.theme-black .result h3 a:visited {
+  color: var(--visited) !important;
+}
+
+.highlight,
+span.highlight,
+mark.highlight {
+  background: transparent !important;
+  color: #d93025 !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+.dialog-error {
+  z-index: 60 !important;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+.dialog-error li {
+  color: var(--text-1) !important;
+}
+
+.dialog-error li:only-child {
+  display: none !important;
+}
+
+.dialog-error .close {
+  display: none !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1196,15 +1296,15 @@ footer p {
     min-height: 54px !important;
     font-size: 16px !important;
     line-height: 54px !important;
-    padding-right: 92px !important;
+    padding-inline-end: 92px !important;
   }
 
   #clear_search {
-    right: 46px !important;
+    inset-inline-end: 46px !important;
   }
 
   #send_search {
-    right: 8px !important;
+    inset-inline-end: 8px !important;
   }
 
   .result h3 a {

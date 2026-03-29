@@ -122,6 +122,9 @@
         {% endif %}
 
         <div class="numbered_pagination">
+        <div class="sunny_pagination_word" aria-hidden="true">
+          <span class="sunny_g">S</span><span>u</span><span>n</span><span>n</span><span>n</span><span>n</span><span>n</span><span>n</span><span>n</span><span>y</span>
+        </div>
         {% for x in range(pstart, pend) %}
             <form method="{{ method or 'POST' }}" action="{{ url_for('search') }}" class="page_number">
                 <input type="hidden" name="q" value="{{ q|e }}" >
