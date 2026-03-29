@@ -1947,7 +1947,7 @@ body.results_endpoint .search_filters {
   font-size: clamp(34px, 5.3vw, 62px) !important;
   font-weight: 800 !important;
   letter-spacing: .02em !important;
-  font-family: "Inter", "Segoe UI", "PingFang TC", "Noto Sans TC", sans-serif !important;
+  font-family: Inter, "Segoe UI", "PingFang TC", "Noto Sans TC", sans-serif !important;
   color: var(--text-1) !important;
 }
 
@@ -1964,7 +1964,7 @@ body.results_endpoint .search_filters {
 .sunny_pagination_word .n9,
 .sunny_pagination_word .n10,
 .sunny_pagination_word .y {
-  color: currentColor !important;
+  color: currentcolor !important;
 }
 
 .category-news .published_date,
@@ -1975,9 +1975,9 @@ body.results_endpoint .search_filters {
   white-space: nowrap !important;
 }
 
-.category-news .published_date::after {
+.category-news .result_author::before {
   content: "|" !important;
-  margin-inline-start: 10px !important;
+  margin-inline: 2px 10px !important;
   color: var(--text-4) !important;
 }
 
@@ -1988,8 +1988,8 @@ body.results_endpoint .search_filters {
 }
 
 #theme_toggle .theme_toggle_icon path {
-  fill: currentColor !important;
-  stroke: currentColor !important;
+  fill: currentcolor !important;
+  stroke: currentcolor !important;
 }
 
 @media screen and (max-width: 72em) {
@@ -2058,7 +2058,7 @@ body.results_endpoint .search_filters {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  color: currentColor !important;
+  color: currentcolor !important;
   opacity: 1 !important;
 }
 
