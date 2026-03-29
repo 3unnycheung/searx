@@ -17,7 +17,13 @@
   {% else %}
   <link rel="stylesheet" href="{{ url_for('static', filename='sxng-ltr.min.css') }}" type="text/css" media="screen">
   {% endif %}
-  <link rel="stylesheet" href="{{ url_for('static', filename='themes/simple/custom-google.css') }}" type="text/css" media="screen">
+  <style>
+    #search_logo img { width: 46px; height: 46px; max-width: 46px; max-height: 46px; object-fit: contain; }
+    .results_endpoint #search_logo img { width: 52px; height: 52px; max-height: 52px; }
+    #clear_search .show_if_nojs, #send_search .show_if_nojs { display: none; }
+    .theme_toggle_icon svg { width: 16px; height: 16px; display: block; }
+  </style>
+  <link rel="stylesheet" href="{{ url_for('static', filename='themes/simple/custom-google.css', v='20260329') }}" type="text/css" media="screen">
   {% if get_setting('server.limiter') or get_setting('server.public_instance') %}
   <link rel="stylesheet" href="{{ url_for('client_token', token=link_token) }}" type="text/css">
   {% endif %}
@@ -60,7 +66,12 @@
         {%- endif -%}
       {%- endblock -%}
       <button id="theme_toggle" type="button" aria-label="{{ _('Toggle dark mode') }}" title="{{ _('Toggle dark mode') }}">
-        <span class="theme_toggle_icon" aria-hidden="true">◐</span>
+        <span class="theme_toggle_icon" aria-hidden="true">
+          <svg viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M10.7 2.1A4.9 4.9 0 1 0 14 10a4.2 4.2 0 1 1-3.3-7.9Z" fill="currentColor"></path>
+            <path d="M3 2.2v1.3M1.7 3.5H3M12.8 12.2v1.3M11.5 13.5h1.3" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"></path>
+          </svg>
+        </span>
         <span class="theme_toggle_text">{{ _('Theme') }}</span>
       </button>
     </nav>
@@ -89,15 +100,23 @@
         root.classList.remove('theme-auto', 'theme-light', 'theme-dark', 'theme-black');
         root.classList.add(themeName);
         localStorage.setItem('sunny-theme', themeName);
-        document.querySelectorAll('input[name=\"theme\"]').forEach((input) => {
-          input.value = themeName.replace('theme-', '');
-        });
       };
       const saved = localStorage.getItem('sunny-theme');
       if (saved && ['theme-light', 'theme-dark', 'theme-auto'].includes(saved)) applyTheme(saved);
       btn.addEventListener('click', () => {
         applyTheme(getTheme() === 'theme-dark' ? 'theme-light' : 'theme-dark');
       });
+
+      const imageNodes = Array.from(document.querySelectorAll('.result-images .image_thumbnail'));
+      for (const img of imageNodes) {
+        img.addEventListener('error', () => {
+          const card = img.closest('.result-images');
+          if (!card) return;
+          card.classList.add('img-load-failed');
+          const urls = document.querySelector('#results.only_template_images #urls');
+          if (urls) urls.appendChild(card);
+        }, { once: true });
+      }
     })();
   </script>
 </body>
