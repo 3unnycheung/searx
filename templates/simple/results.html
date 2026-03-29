@@ -81,12 +81,46 @@
         {% set pstart = [1, pageno - 4]|max %}
         {% set pend = pstart + 10 %}
 
-        <div class="sunny_pagination_head" aria-hidden="true">
-          <span class="sunny_nav_arrow">‹</span>
+        <div class="sunny_pagination_head">
+          {% if pageno > 1 %}
+          <form method="{{ method or 'POST' }}" action="{{ url_for('search') }}" class="sunny_head_prev">
+            <input type="hidden" name="q" value="{{ q|e }}" >
+            {% for category in selected_categories %}
+            <input type="hidden" name="category_{{ category }}" value="1" >
+            {% endfor %}
+            <input type="hidden" name="pageno" value="{{ pageno-1 }}" >
+            <input type="hidden" name="language" value="{{ current_language }}" >
+            <input type="hidden" name="time_range" value="{{ time_range }}" >
+            <input type="hidden" name="safesearch" value="{{ safesearch }}" >
+            <input type="hidden" name="theme" value="{{ theme }}" >
+            {% if timeout_limit %}<input type="hidden" name="timeout_limit" value="{{ timeout_limit|e }}" >{% endif %}
+            {{- engine_data_form(engine_data) -}}
+            <button class="sunny_nav_arrow" type="submit" aria-label="{{ _('Previous page') }}">‹</button>
+          </form>
+          {% else %}
+          <span class="sunny_nav_arrow is-disabled">‹</span>
+          {% endif %}
           <span class="sunny_pagination_word">
             <span class="s">S</span><span class="u">u</span><span class="n1 {% if pageno == 1 %}is-active{% endif %}">n</span><span class="n2 {% if pageno == 2 %}is-active{% endif %}">n</span><span class="n3 {% if pageno == 3 %}is-active{% endif %}">n</span><span class="n4 {% if pageno == 4 %}is-active{% endif %}">n</span><span class="n5 {% if pageno == 5 %}is-active{% endif %}">n</span><span class="n6 {% if pageno == 6 %}is-active{% endif %}">n</span><span class="n7 {% if pageno == 7 %}is-active{% endif %}">n</span><span class="n8 {% if pageno == 8 %}is-active{% endif %}">n</span><span class="n9 {% if pageno == 9 %}is-active{% endif %}">n</span><span class="n10 {% if pageno >= 10 %}is-active{% endif %}">n</span><span class="y">y</span>
           </span>
-          <span class="sunny_nav_arrow">›</span>
+          {%- if results | count > 0 -%}
+          <form method="{{ method or 'POST' }}" action="{{ url_for('search') }}" class="sunny_head_next">
+            <input type="hidden" name="q" value="{{ q|e }}" >
+            {% for category in selected_categories %}
+            <input type="hidden" name="category_{{ category }}" value="1" >
+            {% endfor %}
+            <input type="hidden" name="pageno" value="{{ pageno+1 }}" >
+            <input type="hidden" name="language" value="{{ current_language }}" >
+            <input type="hidden" name="time_range" value="{{ time_range }}" >
+            <input type="hidden" name="safesearch" value="{{ safesearch }}" >
+            <input type="hidden" name="theme" value="{{ theme }}" >
+            {% if timeout_limit %}<input type="hidden" name="timeout_limit" value="{{ timeout_limit|e }}" >{% endif %}
+            {{- engine_data_form(engine_data) -}}
+            <button class="sunny_nav_arrow" type="submit" aria-label="{{ _('Next page') }}">›</button>
+          </form>
+          {%- else -%}
+          <span class="sunny_nav_arrow is-disabled">›</span>
+          {%- endif -%}
         </div>
         <div class="numbered_pagination">
         {% if pageno > 1 %}
