@@ -11,6 +11,33 @@
 {% endfor %}
 </ul>
 <div class="info-page {{pagename}}">
+  {% if active_pagename == 'about' and (active_page.locale or locale).startswith('en') %}
+  <section class="sunny-about-rewrite">
+    <h1>About Sunny Search</h1>
+    <p>
+      Sunny Search is built on SearXNG, an open-source metasearch engine that combines results from multiple providers while minimizing tracking.
+      We do not build personal ad profiles, and we keep the interface clean, fast, and focused.
+    </p>
+    <h2>What makes it different?</h2>
+    <ul>
+      <li>Privacy-first search experience with fewer trackers and less clutter.</li>
+      <li>Multiple categories (General, Images, News, Videos, Map, Music, IT, Science, Files, Social Media) in one place.</li>
+      <li>Modern light/dark interface, fast keyboard-friendly navigation, and customizable preferences.</li>
+    </ul>
+    <h2>Our design goals</h2>
+    <ul>
+      <li>Readable, compact, and information-dense results.</li>
+      <li>Consistent behavior across desktop and mobile.</li>
+      <li>Transparent controls so you can adjust filters quickly.</li>
+    </ul>
+    <h2>Open source</h2>
+    <p>
+      Sunny Search is powered by SearXNG. If you want to learn more, contribute, or self-host, visit the
+      <a href="https://docs.searxng.org/" rel="noreferrer noopener" target="_blank">SearXNG documentation</a>.
+    </p>
+  </section>
+  {% else %}
   {{- active_page.html | safe -}}
+  {% endif %}
 </div>
 {% endblock %}
