@@ -269,6 +269,7 @@ hr,
   display: flex !important;
   align-items: center !important;
   gap: 8px !important;
+  z-index: 95 !important;
 }
 
 #links_on_top a {
@@ -323,15 +324,15 @@ body.results_endpoint #search_header {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  width: 38px !important;
-  height: 38px !important;
-  min-width: 38px !important;
-  min-height: 38px !important;
-  max-width: 38px !important;
-  max-height: 38px !important;
+  width: 46px !important;
+  height: 46px !important;
+  min-width: 46px !important;
+  min-height: 46px !important;
+  max-width: 46px !important;
+  max-height: 46px !important;
   padding: 0 !important;
-  margin-block-start: 6px !important;
-  margin-inline: 10px 14px !important;
+  margin-block-start: 2px !important;
+  margin-inline: 8px 14px !important;
   overflow: hidden !important;
   line-height: 0 !important;
   font-size: 0 !important;
@@ -340,12 +341,12 @@ body.results_endpoint #search_header {
 #search_logo img,
 #search_logo svg {
   display: block !important;
-  width: 38px !important;
-  height: 38px !important;
-  min-width: 38px !important;
-  min-height: 38px !important;
-  max-width: 38px !important;
-  max-height: 38px !important;
+  width: 46px !important;
+  height: 46px !important;
+  min-width: 46px !important;
+  min-height: 46px !important;
+  max-width: 46px !important;
+  max-height: 46px !important;
   object-fit: contain !important;
 }
 
@@ -496,6 +497,11 @@ body.results_endpoint #search_logo svg {
   line-height: 1 !important;
 }
 
+#clear_search .show_if_nojs,
+#send_search .show_if_nojs {
+  display: none !important;
+}
+
 /* ---------- Autocomplete ---------- */
 .autocomplete {
   width: min(760px, 100%) !important;
@@ -596,11 +602,11 @@ body.results_endpoint #search_logo svg {
 .search_filters {
   display: flex !important;
   flex-wrap: wrap !important;
-  justify-content: flex-end !important;
+  justify-content: flex-start !important;
   align-items: center !important;
   gap: 10px !important;
   margin: 8px 0 0 !important;
-  margin-inline-start: 54px !important;
+  margin-inline-start: 0 !important;
   width: min(760px, 100%) !important;
 }
 
@@ -1027,28 +1033,32 @@ select:focus {
   border-radius: 14px !important;
   background: var(--bg-elevated) !important;
   color: var(--text-1) !important;
-  min-height: 46px !important;
-  padding: 0 18px !important;
-  font-size: 21px !important;
+  min-height: 40px !important;
+  padding: 0 14px !important;
+  font-size: 16px !important;
   box-shadow: var(--shadow-sm) !important;
 }
 
 #pagination .numbered_pagination .page_number input,
 #pagination .numbered_pagination .page_number_current {
-  min-width: 52px !important;
-  min-height: 46px !important;
-  border-radius: 14px !important;
+  min-width: 40px !important;
+  min-height: 36px !important;
+  border-radius: 10px !important;
 }
 
 #backToTop {
   inset-inline-end: 24px !important;
   bottom: 28px !important;
+  width: auto !important;
+  height: auto !important;
+  position: fixed !important;
+  z-index: 40 !important;
 }
 
 #backToTop a {
-  width: 52px !important;
-  height: 52px !important;
-  border-radius: 16px !important;
+  width: 42px !important;
+  height: 42px !important;
+  border-radius: 12px !important;
   border: 1px solid var(--line) !important;
   background: linear-gradient(150deg, color-mix(in srgb, var(--brand) 18%, var(--bg-elevated)), var(--bg-elevated)) !important;
   color: var(--brand) !important;
@@ -1075,20 +1085,22 @@ select:focus {
 
 .result-images {
   overflow: hidden !important;
-  padding: 0 !important;
+  padding: 6px !important;
   border-radius: 20px !important;
+  background: var(--bg-elevated) !important;
 }
 
 .result-images a {
   display: block !important;
-  min-height: 260px !important;
+  min-height: 220px !important;
 }
 
 .result-images .image_thumbnail {
   width: 100% !important;
-  height: 260px !important;
-  object-fit: cover !important;
-  border-radius: 0 !important;
+  height: 240px !important;
+  object-fit: contain !important;
+  border-radius: 12px !important;
+  background: var(--bg-subtle) !important;
 }
 
 .result-images img,
@@ -1104,12 +1116,18 @@ select:focus {
 }
 
 .result-videos .result_author {
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 8px !important;
-  padding: 2px 10px !important;
-  border-radius: 999px !important;
-  background: var(--bg-subtle) !important;
+  display: none !important;
+}
+
+.result-videos .altlink {
+  margin: 8px 0 10px !important;
+}
+
+.result-videos .altlink .btn-collapse {
+  border-radius: 10px !important;
+  min-height: 38px !important;
+  padding: 0 14px !important;
+  font-size: 16px !important;
 }
 
 .result-news .result {
@@ -1118,15 +1136,24 @@ select:focus {
   padding: 14px !important;
 }
 
+.result-news .url_wrapper {
+  display: block !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  font-size: 12px !important;
+  color: var(--text-3) !important;
+}
+
 .sunny_pagination_word {
   width: 100% !important;
   display: block !important;
   text-align: center !important;
-  font-size: 56px !important;
+  font-size: 34px !important;
   font-weight: 700 !important;
   letter-spacing: -0.04em !important;
   color: #e8eaed !important;
-  margin: 8px 0 6px !important;
+  margin: 4px 0 2px !important;
   line-height: 1 !important;
 }
 
@@ -1143,7 +1170,10 @@ select:focus {
 .numbered_pagination {
   justify-content: center !important;
   align-items: center !important;
-  flex-wrap: wrap !important;
+  flex-wrap: nowrap !important;
+  gap: 6px !important;
+  overflow-x: auto !important;
+  padding-bottom: 6px !important;
 }
 
 .numbered_pagination .page_number,
@@ -1220,6 +1250,10 @@ mark.highlight {
 
 .dialog-error {
   z-index: 60 !important;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
 }
 
 .dialog-error li {
@@ -1227,6 +1261,10 @@ mark.highlight {
 }
 
 .dialog-error li:only-child {
+  display: none !important;
+}
+
+.dialog-error .close {
   display: none !important;
 }
 
