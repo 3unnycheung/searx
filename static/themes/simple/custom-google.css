@@ -1812,3 +1812,231 @@ body.results_endpoint .search_filters {
     font-size: 30px !important;
   }
 }
+
+/* ---------- UX polish (2026-03-29 v3) ---------- */
+#links_on_top {
+  top: 24px !important;
+}
+
+body.results_endpoint .search_filters {
+  margin-inline-start: min(190px, 18vw) !important;
+  width: min(760px, calc(100% - min(190px, 18vw))) !important;
+}
+
+#results.only_template_images #urls {
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+}
+
+#results.only_template_images #urls .result-images {
+  border-radius: 14px !important;
+  padding: 10px !important;
+  border: 1px solid var(--line-soft) !important;
+  background: var(--bg-elevated) !important;
+}
+
+#results.only_template_images #urls .result-images a {
+  display: grid !important;
+  gap: 8px !important;
+}
+
+#results.only_template_images #urls .result-images .image_thumbnail {
+  width: 100% !important;
+  height: 190px !important;
+  object-fit: cover !important;
+  border-radius: 12px !important;
+  background: var(--bg-subtle) !important;
+}
+
+#results.only_template_images #urls .result-images .image_overlay_meta {
+  position: static !important;
+  inset: auto !important;
+  padding: 0 !important;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  border-radius: 0 !important;
+}
+
+#results.only_template_images #urls .result-images .image_overlay_site {
+  margin: 0 0 2px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  text-transform: lowercase !important;
+  color: var(--text-2) !important;
+}
+
+#results.only_template_images #urls .result-images .image_overlay_title {
+  margin: 0 !important;
+  font-size: 13px !important;
+  line-height: 1.35 !important;
+  color: var(--text-1) !important;
+  -webkit-line-clamp: 2 !important;
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+
+#results.only_template_images #urls .result-images .title,
+#results.only_template_images #urls .result-images .source {
+  display: none !important;
+}
+
+.result-images .detail {
+  inset: 3vh 6vw auto !important;
+  width: min(88vw, 1120px) !important;
+  max-height: 92vh !important;
+  overflow: auto !important;
+  border-radius: 16px !important;
+  border: 1px solid var(--line) !important;
+  background: var(--bg-elevated) !important;
+  color: var(--text-1) !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, .45) !important;
+}
+
+.result-images .result-images-source img {
+  border-radius: 12px !important;
+  object-fit: contain !important;
+  background: var(--bg-subtle) !important;
+}
+
+.result-images .result-images-labels,
+.result-images .result-images-labels h4,
+.result-images .result-images-labels p,
+.result-images .result-images-labels span {
+  color: var(--text-1) !important;
+}
+
+.result-images .result-images-labels .result-url a {
+  color: var(--brand) !important;
+}
+
+.result-images .result-detail-close,
+.result-images .result-detail-previous,
+.result-images .result-detail-next {
+  color: var(--text-1) !important;
+  border-color: var(--line) !important;
+  background: var(--bg-soft) !important;
+}
+
+#backToTop {
+  width: 24px !important;
+  height: 24px !important;
+}
+
+#backToTop a {
+  width: 24px !important;
+  height: 24px !important;
+  min-width: 24px !important;
+  max-width: 24px !important;
+  border-radius: 6px !important;
+  border: 1px solid var(--line) !important;
+  background: var(--bg-elevated) !important;
+  color: var(--text-1) !important;
+}
+
+#backToTop a .sxng-icon-set-small {
+  width: 14px !important;
+  height: 14px !important;
+  min-width: 14px !important;
+  min-height: 14px !important;
+  stroke-width: 52px !important;
+}
+
+.sunny_pagination_word {
+  margin: 8px 0 4px !important;
+  font-size: clamp(34px, 5.3vw, 62px) !important;
+  font-weight: 800 !important;
+  letter-spacing: .02em !important;
+  font-family: "Inter", "Segoe UI", "PingFang TC", "Noto Sans TC", sans-serif !important;
+  color: var(--text-1) !important;
+}
+
+.sunny_pagination_word .s,
+.sunny_pagination_word .u,
+.sunny_pagination_word .n1,
+.sunny_pagination_word .n2,
+.sunny_pagination_word .n3,
+.sunny_pagination_word .n4,
+.sunny_pagination_word .n5,
+.sunny_pagination_word .n6,
+.sunny_pagination_word .n7,
+.sunny_pagination_word .n8,
+.sunny_pagination_word .n9,
+.sunny_pagination_word .n10,
+.sunny_pagination_word .y {
+  color: currentColor !important;
+}
+
+.category-news .published_date,
+.category-news .result_author {
+  display: inline-flex !important;
+  align-items: center !important;
+  margin-right: 10px !important;
+  white-space: nowrap !important;
+}
+
+.category-news .published_date::after {
+  content: "|" !important;
+  margin-inline-start: 10px !important;
+  color: var(--text-4) !important;
+}
+
+#theme_toggle .theme_toggle_icon svg {
+  width: 19px !important;
+  height: 19px !important;
+  display: block !important;
+}
+
+#theme_toggle .theme_toggle_icon path {
+  fill: currentColor !important;
+  stroke: currentColor !important;
+}
+
+@media screen and (max-width: 72em) {
+  #results.only_template_images #urls {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+}
+
+@media screen and (max-width: 56em) {
+  #results.only_template_images #urls {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+@media screen and (max-width: 50em) {
+  #theme_toggle {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: 40px !important;
+    min-height: 36px !important;
+  }
+
+  #theme_toggle .theme_toggle_text {
+    display: none !important;
+  }
+
+  #theme_toggle .theme_toggle_icon svg {
+    width: 20px !important;
+    height: 20px !important;
+  }
+
+  body.results_endpoint .search_filters {
+    margin-inline-start: 10px !important;
+    width: calc(100% - 20px) !important;
+  }
+
+  #results.only_template_images #urls {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  #results.only_template_images #urls .result-images .image_thumbnail {
+    height: 150px !important;
+  }
+
+  .result-images .detail {
+    inset: 2vh 4vw !important;
+    width: 92vw !important;
+  }
+}

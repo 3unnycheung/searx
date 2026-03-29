@@ -1,13 +1,19 @@
+{%- set img_src_lower = (result.img_src or '')|lower -%}
+{%- set img_format_lower = (result.img_format or '')|lower -%}
+{%- set host = (result.parsed_url.netloc or '')|lower -%}
+{%- set host = host.split(':')[0] -%}
+{%- set host = host[4:] if host.startswith('www.') else host -%}
+{%- set host_parts = host.split('.') -%}
+{%- set site_name = host_parts[-2] if host_parts|length > 1 else host -%}
+{%- if img_format_lower != 'svg' and not img_src_lower.endswith('.svg') -%}
 <article class="result result-images {% if result['category'] %}category-{{ result['category'] }}{% endif %}">{{- "" -}}
         <a {% if results_on_new_tab %}target="_blank" rel="noopener noreferrer"{% else %}rel="noreferrer"{% endif %} href="{{ result.img_src }}">{{- "" -}}
                 <img class="image_thumbnail" {% if results_on_new_tab %}target="_blank" rel="noopener noreferrer"{% else %}rel="noreferrer"{% endif %} src="{% if result.thumbnail_src %}{{ image_proxify(result.thumbnail_src) }}{% else %}{{ image_proxify(result.img_src) }}{% endif %}" alt="{{ result.title|striptags }}" loading="lazy" width="200" height="200">{{- "" -}}
                 <span class="image_overlay_meta">
+                        <span class="image_overlay_site">{{- site_name -}}</span>
                         <span class="image_overlay_title">{{ result.title|striptags }}</span>
-                        <span class="image_overlay_site">{{- result.parsed_url.netloc -}}</span>
                 </span>
 		{%- if result.resolution %} <span class="image_resolution">{{ result.resolution }}</span> {%- endif -%}
-		<span class="title">{{ result.title|striptags }}</span>{{- "" -}}
-                <span class="source">{{- result.parsed_url.netloc -}}</span>{{- "" -}}
         </a>{{- "" -}}
         <div class="detail swipe-horizontal">{{- "" -}}
                 <a class="result-detail-close" href="#">{{ icon('close') }}</a>{{- "" -}}
@@ -30,3 +36,4 @@
                 </div>{{- "" -}}
         </div>{{- "" -}}
 </article>
+{%- endif -%}
