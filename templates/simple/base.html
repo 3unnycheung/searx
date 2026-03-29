@@ -49,7 +49,7 @@
     {% endif %}
 
     <nav id="links_on_top">
-      {%- from 'simple/icons.html' import icon_big, icon_small -%}
+      {%- from 'simple/icons.html' import icon_big -%}
       {%- block linkto_about -%}
         <a href="{{ url_for('info', pagename='about') }}" class="link_on_top_about">{{ icon_big('information-circle') }}<span>{{ _('About') }}</span></a>
       {%- endblock -%}
@@ -66,7 +66,12 @@
         {%- endif -%}
       {%- endblock -%}
       <button id="theme_toggle" type="button" aria-label="{{ _('Toggle dark mode') }}" title="{{ _('Toggle dark mode') }}">
-        <span class="theme_toggle_icon" aria-hidden="true">{{ icon_small('layers') }}</span>
+        <span class="theme_toggle_icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.8"></circle>
+            <path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor"></path>
+          </svg>
+        </span>
         <span class="theme_toggle_text">{{ _('Theme') }}</span>
       </button>
     </nav>
@@ -95,9 +100,6 @@
         root.classList.remove('theme-auto', 'theme-light', 'theme-dark', 'theme-black');
         root.classList.add(themeName);
         localStorage.setItem('sunny-theme', themeName);
-        document.querySelectorAll('input[name=\"theme\"]').forEach((input) => {
-          input.value = themeName.replace('theme-', '');
-        });
       };
       const saved = localStorage.getItem('sunny-theme');
       if (saved && ['theme-light', 'theme-dark', 'theme-auto'].includes(saved)) applyTheme(saved);

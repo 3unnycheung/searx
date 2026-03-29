@@ -46,9 +46,6 @@
 
 <!-- Draw result sub footer -->
 {%- macro result_sub_footer(result) -%}
-<div class="engines">
-  {% for engine in result.engines %}<span>{{ engine }}</span>{% endfor %}
-</div>{{- '' -}}
 <div class="break"></div>{{- '' -}}
 {%- endmacro -%}
 

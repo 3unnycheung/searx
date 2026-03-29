@@ -630,7 +630,8 @@ body.results_endpoint .search_box {
 
 body.results_endpoint .search_filters {
   margin-top: 4px !important;
-  margin-inline-start: 0 !important;
+  margin-inline-start: min(68px, 8vw) !important;
+  width: min(760px, calc(100% - min(68px, 8vw))) !important;
 }
 
 .search_filters > div {
@@ -836,10 +837,7 @@ article[data-vim-selected]::after {
 }
 
 .engines {
-  display: flex !important;
-  flex-wrap: wrap !important;
-  gap: 6px !important;
-  margin-top: 10px !important;
+  display: none !important;
 }
 
 .engines span,
@@ -1152,31 +1150,33 @@ select:focus {
 .result-images,
 .result-videos,
 .result-news {
-  border: 1px solid var(--line-soft) !important;
-  border-radius: 18px !important;
-  padding: 16px !important;
-  background: color-mix(in srgb, var(--bg-subtle) 42%, transparent) !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
 }
 
 .result-images {
   overflow: visible !important;
-  padding: 4px !important;
-  border-radius: 20px !important;
-  background: var(--bg-elevated) !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
 }
 
 .result-images a {
   display: block !important;
   min-height: 0 !important;
+  text-decoration: none !important;
 }
 
 .result-images .image_thumbnail {
-  width: 100% !important;
+  width: auto !important;
+  max-width: 100% !important;
   height: auto !important;
   aspect-ratio: auto !important;
   object-fit: contain !important;
-  border-radius: 12px !important;
-  background: transparent !important;
+  border-radius: 10px !important;
+  background: var(--bg-subtle) !important;
 }
 
 .result-images img,
@@ -1251,20 +1251,24 @@ select:focus {
   white-space: nowrap !important;
 }
 
-.sunny_pagination_word .g1 { color: #4285f4 !important; }
-.sunny_pagination_word .o1 { color: #ea4335 !important; }
-.sunny_pagination_word .o2 { color: #fbbc05 !important; }
-.sunny_pagination_word .o3,
-.sunny_pagination_word .o4,
-.sunny_pagination_word .o5,
-.sunny_pagination_word .o6,
-.sunny_pagination_word .o7,
-.sunny_pagination_word .o8,
-.sunny_pagination_word .o9,
-.sunny_pagination_word .o10 { color: var(--brand) !important; }
-.sunny_pagination_word .g2 { color: #34a853 !important; }
-.sunny_pagination_word .l { color: #ea4335 !important; }
-.sunny_pagination_word .e { color: #4285f4 !important; }
+.sunny_pagination_word .s,
+.sunny_pagination_word .n1,
+.sunny_pagination_word .n2,
+.sunny_pagination_word .n3,
+.sunny_pagination_word .n4,
+.sunny_pagination_word .n5,
+.sunny_pagination_word .n6,
+.sunny_pagination_word .n7,
+.sunny_pagination_word .n8,
+.sunny_pagination_word .n9,
+.sunny_pagination_word .n10,
+.sunny_pagination_word .y {
+  color: #ff9f2f !important;
+}
+
+.sunny_pagination_word .u {
+  color: #16a3ff !important;
+}
 
 .numbered_pagination {
   justify-content: center !important;
