@@ -191,7 +191,7 @@ html,
 body {
   background: var(--bg) !important;
   color: var(--text-1) !important;
-  font-family: Arial, Helvetica, sans-serif !important;
+  font-family: "Google Sans", "Noto Sans TC", "Noto Sans", "Segoe UI", sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -302,14 +302,14 @@ body.results_endpoint #search_header {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  width: 24px !important;
-  height: 24px !important;
-  min-width: 24px !important;
-  min-height: 24px !important;
-  max-width: 24px !important;
-  max-height: 24px !important;
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  min-height: 32px !important;
+  max-width: 32px !important;
+  max-height: 32px !important;
   padding: 0 !important;
-  margin: 0 12px 0 0 !important;
+  margin: 0 14px 0 2px !important;
   overflow: hidden !important;
   line-height: 0 !important;
   font-size: 0 !important;
@@ -318,13 +318,24 @@ body.results_endpoint #search_header {
 #search_logo img,
 #search_logo svg {
   display: block !important;
-  width: 24px !important;
-  height: 24px !important;
-  min-width: 24px !important;
-  min-height: 24px !important;
-  max-width: 24px !important;
-  max-height: 24px !important;
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  min-height: 32px !important;
+  max-width: 32px !important;
+  max-height: 32px !important;
   object-fit: contain !important;
+}
+
+body.results_endpoint #search_logo,
+body.results_endpoint #search_logo img,
+body.results_endpoint #search_logo svg {
+  width: 28px !important;
+  height: 28px !important;
+  min-width: 28px !important;
+  min-height: 28px !important;
+  max-width: 28px !important;
+  max-height: 28px !important;
 }
 
 /* ---------- Search box ---------- */
@@ -345,6 +356,7 @@ body.results_endpoint #search_header {
   background: var(--bg-input) !important;
   box-shadow: none !important;
   overflow: visible !important;
+  isolation: isolate !important;
   transition: box-shadow 140ms ease, border-color 140ms ease, background-color 140ms ease;
 }
 
@@ -375,7 +387,7 @@ body.results_endpoint #search_header {
   color: var(--text-1) !important;
   font-size: 16px !important;
   line-height: 58px !important;
-  padding: 0 92px 0 20px !important;
+  padding: 0 98px 0 24px !important;
   margin: 0 !important;
   box-sizing: border-box !important;
 }
@@ -400,10 +412,10 @@ body.results_endpoint #search_header {
   position: absolute !important;
   top: 50% !important;
   transform: translateY(-50%) !important;
-  width: 40px !important;
-  height: 40px !important;
-  min-width: 40px !important;
-  min-height: 40px !important;
+  width: 36px !important;
+  height: 36px !important;
+  min-width: 36px !important;
+  min-height: 36px !important;
   padding: 0 !important;
   margin: 0 !important;
   border: 0 !important;
@@ -417,12 +429,12 @@ body.results_endpoint #search_header {
 }
 
 #clear_search {
-  right: 44px !important;
+  right: 48px !important;
   color: var(--text-3) !important;
 }
 
 #send_search {
-  right: 8px !important;
+  right: 10px !important;
   color: var(--text-3) !important;
 }
 
@@ -436,11 +448,30 @@ body.results_endpoint #search_header {
 #clear_search svg,
 #send_search i,
 #clear_search i {
-  width: 22px !important;
-  height: 22px !important;
-  min-width: 22px !important;
-  min-height: 22px !important;
+  width: 20px !important;
+  height: 20px !important;
+  min-width: 20px !important;
+  min-height: 20px !important;
   display: block !important;
+}
+
+#send_search::before,
+#send_search::after,
+#clear_search::before,
+#clear_search::after,
+.search_box button::before,
+.search_box button::after {
+  content: none !important;
+  display: none !important;
+  border: 0 !important;
+}
+
+#clear_search span,
+#send_search span {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
 }
 
 /* ---------- Autocomplete ---------- */
@@ -470,6 +501,11 @@ body.results_endpoint #search_header {
 .autocomplete li {
   background: var(--bg-floating) !important;
   border-color: var(--line) !important;
+}
+
+.autocomplete ul,
+.autocomplete li {
+  list-style: none !important;
 }
 
 .autocomplete.open {
@@ -503,6 +539,12 @@ body.results_endpoint #search_header {
   line-height: 1.4 !important;
   background: var(--bg-floating) !important;
   color: var(--text-1) !important;
+}
+
+.autocomplete li::before,
+.autocomplete li::after,
+.autocomplete li::marker {
+  content: none !important;
 }
 
 .autocomplete > ul > li:hover,
@@ -573,6 +615,11 @@ button.category_button:active {
   padding: 18px 0 20px !important;
   box-shadow: none !important;
   margin-bottom: 0 !important;
+}
+
+.result:hover,
+#main_results article.result:hover {
+  background: color-mix(in srgb, var(--bg-subtle) 60%, transparent) !important;
 }
 
 .result + .result,
@@ -741,6 +788,17 @@ article[data-vim-selected]:focus {
   border-left: 0 !important;
   border-radius: 0 !important;
   background: transparent !important;
+  box-shadow: none !important;
+}
+
+article[data-vim-selected],
+article[data-vim-selected="true"],
+article[data-vim-selected]:focus,
+article[data-vim-selected="true"]:focus,
+#main_results article.result:focus,
+#main_results article.result:focus-within {
+  border: none !important;
+  outline: none !important;
   box-shadow: none !important;
 }
 
@@ -914,6 +972,34 @@ footer p {
   outline-offset: 2px !important;
 }
 
+/* ---------- Dark theme hardening (remove white blocks / white text blend) ---------- */
+:root.theme-dark .result,
+:root.theme-black .result,
+:root.theme-dark #answers,
+:root.theme-black #answers,
+:root.theme-dark #sidebar .infobox,
+:root.theme-black #sidebar .infobox,
+:root.theme-dark .autocomplete,
+:root.theme-black .autocomplete,
+:root.theme-dark .autocomplete.open,
+:root.theme-black .autocomplete.open,
+:root.theme-dark .search_box,
+:root.theme-black .search_box {
+  background-color: var(--bg-elevated) !important;
+  color: var(--text-1) !important;
+}
+
+:root.theme-dark .result *,
+:root.theme-black .result *,
+:root.theme-dark #answers *,
+:root.theme-black #answers *,
+:root.theme-dark #sidebar .infobox *,
+:root.theme-black #sidebar .infobox *,
+:root.theme-dark .autocomplete *,
+:root.theme-black .autocomplete * {
+  color: inherit !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -946,15 +1032,15 @@ footer p {
     min-height: 54px !important;
     font-size: 16px !important;
     line-height: 54px !important;
-    padding-right: 88px !important;
+    padding-right: 92px !important;
   }
 
   #clear_search {
-    right: 42px !important;
+    right: 46px !important;
   }
 
   #send_search {
-    right: 6px !important;
+    right: 8px !important;
   }
 
   .result h3 a {
