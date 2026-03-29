@@ -17,7 +17,13 @@
   {% else %}
   <link rel="stylesheet" href="{{ url_for('static', filename='sxng-ltr.min.css') }}" type="text/css" media="screen">
   {% endif %}
-  <link rel="stylesheet" href="{{ url_for('static', filename='themes/simple/custom-google.css') }}" type="text/css" media="screen">
+  <style>
+    #search_logo img { width: 46px; height: 46px; max-width: 46px; max-height: 46px; object-fit: contain; }
+    .results_endpoint #search_logo img { width: 52px; height: 52px; max-height: 52px; }
+    #clear_search .show_if_nojs, #send_search .show_if_nojs { display: none; }
+    .theme_toggle_icon svg { width: 16px; height: 16px; display: block; }
+  </style>
+  <link rel="stylesheet" href="{{ url_for('static', filename='themes/simple/custom-google.css', v='20260329') }}" type="text/css" media="screen">
   {% if get_setting('server.limiter') or get_setting('server.public_instance') %}
   <link rel="stylesheet" href="{{ url_for('client_token', token=link_token) }}" type="text/css">
   {% endif %}
@@ -43,7 +49,7 @@
     {% endif %}
 
     <nav id="links_on_top">
-      {%- from 'simple/icons.html' import icon_big -%}
+      {%- from 'simple/icons.html' import icon_big, icon_small -%}
       {%- block linkto_about -%}
         <a href="{{ url_for('info', pagename='about') }}" class="link_on_top_about">{{ icon_big('information-circle') }}<span>{{ _('About') }}</span></a>
       {%- endblock -%}
@@ -60,7 +66,7 @@
         {%- endif -%}
       {%- endblock -%}
       <button id="theme_toggle" type="button" aria-label="{{ _('Toggle dark mode') }}" title="{{ _('Toggle dark mode') }}">
-        <span class="theme_toggle_icon" aria-hidden="true">◐</span>
+        <span class="theme_toggle_icon" aria-hidden="true">{{ icon_small('layers') }}</span>
         <span class="theme_toggle_text">{{ _('Theme') }}</span>
       </button>
     </nav>
