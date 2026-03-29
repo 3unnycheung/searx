@@ -243,17 +243,22 @@ hr,
 }
 
 .index .title {
-  background: url(./img/logo.svg) center center / contain no-repeat !important;
+  background: url("./img/logo.svg") center center / contain no-repeat !important;
   width: min(820px, 88vw) !important;
   min-height: 142px !important;
   margin: 0 auto 22px !important;
 }
 
 .index h1 {
-  visibility: hidden !important;
-  font-size: 0 !important;
-  line-height: 0 !important;
-  margin: 0 !important;
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }
 
 .index .search_box,
@@ -416,15 +421,11 @@ body.results_endpoint #search_logo svg {
 }
 
 #q,
-#q::placeholder,
-#q::-webkit-input-placeholder,
-#q::-moz-placeholder {
+#q::placeholder {
   color: var(--text-1) !important;
 }
 
-#q::placeholder,
-#q::-webkit-input-placeholder,
-#q::-moz-placeholder {
+#q::placeholder {
   color: var(--text-4) !important;
 }
 
@@ -947,7 +948,7 @@ article[data-vim-selected="true"]:focus,
   color: var(--text-3) !important;
 }
 
-#main_preferences input:not([type=checkbox]):not([type=radio]),
+#main_preferences input:not([type="checkbox"], [type="radio"]),
 #main_preferences select,
 #main_preferences textarea,
 select {
@@ -975,8 +976,8 @@ select option {
   color: var(--text-1) !important;
 }
 
-#main_preferences input:not([type=checkbox]):not([type=radio]):hover,
-#main_preferences input:not([type=checkbox]):not([type=radio]):focus,
+#main_preferences input:not([type="checkbox"], [type="radio"]):hover,
+#main_preferences input:not([type="checkbox"], [type="radio"]):focus,
 #main_preferences select:hover,
 #main_preferences select:focus,
 #main_preferences textarea:hover,
@@ -1152,14 +1153,9 @@ select:focus {
   font-size: 34px !important;
   font-weight: 700 !important;
   letter-spacing: -0.04em !important;
-  color: #e8eaed !important;
+  color: var(--text-1) !important;
   margin: 4px 0 2px !important;
   line-height: 1 !important;
-}
-
-:root.theme-light .sunny_pagination_word,
-:root.theme-auto .sunny_pagination_word {
-  color: #202124 !important;
 }
 
 .sunny_pagination_word .sunny_g,

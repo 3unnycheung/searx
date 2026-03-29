@@ -116,6 +116,10 @@
         {%- endif -%}
         {% set pstart = 1 %}
         {% set pend = 11 %}
+        {% if pageno > 5 %}
+            {% set pstart = pageno - 4 %}
+            {% set pend = pageno + 6 %}
+        {% endif %}
 
         <div class="numbered_pagination">
         <div class="sunny_pagination_word" aria-hidden="true">
