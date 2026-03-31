@@ -1,13 +1,36 @@
+{%- set img_src_lower = (result.img_src or '')|lower -%}
+{%- set thumbnail_src_lower = (result.thumbnail_src or '')|lower -%}
+{%- set rendered_src = thumbnail_src_lower if thumbnail_src_lower else img_src_lower -%}
+{%- set rendered_src_path = rendered_src.split('?')[0] -%}
+{%- set img_format_lower = (result.img_format or '')|lower -%}
+{%- set is_svg_image = (img_format_lower in ['svg', 'image/svg+xml']) or rendered_src_path.endswith('.svg') or img_src_lower.split('?')[0].endswith('.svg') -%}
+
+{%- set host = (result.parsed_url.netloc or '')|lower -%}
+{%- set host = host[1:-1] if host.startswith('[') and host.endswith(']') else host -%}
+{%- set host = host.split(':')[0] -%}
+{%- set host = host[4:] if host.startswith('www.') else host -%}
+{%- set host_parts = host.split('.') -%}
+{%- set is_ipv4 = host_parts|length == 4 and (host_parts[0]|int|string == host_parts[0]) and (host_parts[1]|int|string == host_parts[1]) and (host_parts[2]|int|string == host_parts[2]) and (host_parts[3]|int|string == host_parts[3]) -%}
+{%- set public_suffix_pairs = ['co.uk', 'org.uk', 'gov.uk', 'ac.uk', 'com.au', 'net.au', 'org.au', 'com.br', 'co.jp', 'com.cn', 'com.tw', 'co.kr', 'co.nz', 'com.sg', 'com.hk'] -%}
+{%- set suffix_pair = host_parts[-2] ~ '.' ~ host_parts[-1] if host_parts|length > 1 else '' -%}
+{%- if host in ['localhost', ''] or is_ipv4 -%}
+  {%- set site_name = host -%}
+{%- elif host_parts|length <= 1 -%}
+  {%- set site_name = host -%}
+{%- elif suffix_pair in public_suffix_pairs and host_parts|length > 2 -%}
+  {%- set site_name = host_parts[-3] -%}
+{%- else -%}
+  {%- set site_name = host_parts[-2] -%}
+{%- endif -%}
+{%- if not is_svg_image -%}
 <article class="result result-images {% if result['category'] %}category-{{ result['category'] }}{% endif %}">{{- "" -}}
         <a {% if results_on_new_tab %}target="_blank" rel="noopener noreferrer"{% else %}rel="noreferrer"{% endif %} href="{{ result.img_src }}">{{- "" -}}
                 <img class="image_thumbnail" {% if results_on_new_tab %}target="_blank" rel="noopener noreferrer"{% else %}rel="noreferrer"{% endif %} src="{% if result.thumbnail_src %}{{ image_proxify(result.thumbnail_src) }}{% else %}{{ image_proxify(result.img_src) }}{% endif %}" alt="{{ result.title|striptags }}" loading="lazy" width="200" height="200">{{- "" -}}
                 <span class="image_overlay_meta">
+                        <span class="image_overlay_site">{{- site_name -}}</span>
                         <span class="image_overlay_title">{{ result.title|striptags }}</span>
-                        <span class="image_overlay_site">{{- result.parsed_url.netloc -}}</span>
                 </span>
 		{%- if result.resolution %} <span class="image_resolution">{{ result.resolution }}</span> {%- endif -%}
-		<span class="title">{{ result.title|striptags }}</span>{{- "" -}}
-                <span class="source">{{- result.parsed_url.netloc -}}</span>{{- "" -}}
         </a>{{- "" -}}
         <div class="detail swipe-horizontal">{{- "" -}}
                 <a class="result-detail-close" href="#">{{ icon('close') }}</a>{{- "" -}}
@@ -30,3 +53,4 @@
                 </div>{{- "" -}}
         </div>{{- "" -}}
 </article>
+{%- endif -%}
