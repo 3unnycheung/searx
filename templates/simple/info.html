@@ -37,7 +37,7 @@
     </p>
   </section>
   {% else %}
-  {% if active_page %}{{- active_page.html | safe -}}{% endif %}
+  {% if active_page and active_page.html %}{{- active_page.html | safe -}}{% endif %}
   {% endif %}
 </div>
 {% endblock %}

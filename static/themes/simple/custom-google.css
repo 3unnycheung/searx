@@ -1621,6 +1621,12 @@ body.results_endpoint .search_filters {
    Images — grid, cards, detail panel, mobile  (2026-03-31)
    =================================================================== */
 
+/* ---- Layout tokens used by the image detail panel ---- */
+:root {
+  --img-detail-panel-left: 59.25rem; /* width at which grid narrows and panel starts */
+  --img-detail-panel-top: 10rem;     /* vertical offset to clear the sticky header */
+}
+
 /* ---- Image result grid ---- */
 #results.only_template_images #urls {
   display: grid !important;
@@ -1729,7 +1735,7 @@ body.results_endpoint .search_filters {
 
 /* When detail is open, narrow the image grid to leave room */
 #main_results #results.only_template_images.image-detail-open {
-  max-width: min(98%, 59.25rem) !important;
+  max-width: min(98%, var(--img-detail-panel-left)) !important;
 }
 
 /* Show the selected image's detail as a fixed right-side panel */
@@ -1737,7 +1743,7 @@ body.results_endpoint .search_filters {
   display: flex !important;
   flex-direction: column !important;
   position: fixed !important;
-  inset: 10rem 0 0 min(59.25rem, 60vw) !important;
+  inset: var(--img-detail-panel-top) 0 0 min(var(--img-detail-panel-left), 60vw) !important;
   z-index: 10020 !important;
   padding: 3.5rem 2rem 2rem !important;
   overflow-y: auto !important;
