@@ -11,7 +11,7 @@
 {% endfor %}
 </ul>
 <div class="info-page {{pagename}}">
-  {% if active_pagename == 'about' and (active_page.locale or locale).startswith('en') %}
+  {% if active_pagename == 'about' and (locale or '').startswith('en') %}
   <section class="sunny-about-rewrite">
     <h1>About Sunny Search</h1>
     <p>
@@ -37,7 +37,7 @@
     </p>
   </section>
   {% else %}
-  {{- active_page.html | safe -}}
+  {% if active_page and active_page.html %}{{- active_page.html | safe -}}{% endif %}
   {% endif %}
 </div>
 {% endblock %}
